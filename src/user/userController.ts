@@ -9,7 +9,7 @@ import { config } from "../config/config.ts";
 const createUser = async (req: Request, res: Response, next: NextFunction) => {
   const { name, email, password } = req.body;
 
-    //validation
+  //validation
   if (!name || !email || !password) {
     const error = createHttpError(400, "All fields are required");
     return next(error);
@@ -33,11 +33,12 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
   });
 
   //Token generation JWT
-    const token = sign({sub:newUser._id}, config.jwtSecret as string , {expiresIn:'1h'});
+  const token = sign({ sub: newUser._id }, config.jwtSecret as string, {
+    expiresIn: "1h",
+  });
 
   //response
   res.json({ accessToken: token });
 };
-
 
 export { createUser };
