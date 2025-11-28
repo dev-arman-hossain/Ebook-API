@@ -2,8 +2,12 @@ import express from "express";
 import { createBook } from "./bookController.ts";
 import multer from "multer";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const bookRouter = express.Router();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 //file local storage-->
 const upload = multer({
