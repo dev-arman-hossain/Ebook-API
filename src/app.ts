@@ -7,13 +7,12 @@ import globalErrorHandler from "./middlewares/globalErrorhandler.ts";
 import userRouter from "./user/userRouter.ts";
 import cors from "cors";
 import morgan from "morgan";
+import bookRouter from "./book/bookRouter.ts";
 
 const app = express();
 app.use(express.json());
 app.use(cors());
-morgan('dev')
-
-
+morgan("dev");
 
 //Routes
 // http methods
@@ -24,6 +23,7 @@ app.get("/", (req, res, next) => {
 
 //router register
 app.use("/api/users", userRouter);
+app.use("/api/books", bookRouter);
 
 //global error handler
 app.use(globalErrorHandler);

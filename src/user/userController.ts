@@ -17,7 +17,6 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
   }
 
   //Database call
-
   try {
     const user = await userModel.findOne({ email });
 
@@ -79,11 +78,15 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
   }
 
   //token generation
-  const token = sign({ sub: user._id }, config.jwtSecret as string, {
-    expiresIn: "1h",
-    algorithm: "HS256",
-  });
-  res.status(200).json({ accessToken: token });
+  try {
+    const token = sign({ sub: user._id }, config.jwtSecret as string, {
+      expiresIn: "1h",
+      algorithm: "HS256",
+    });
+    res.status(200).json({ accessToken: token });
+  } catch (err) {
+    return next(createHttpError(500, "error while signing the jwt token"));
+  }
 
   res.json({ message: "Ok" });
 };
