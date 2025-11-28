@@ -5,10 +5,15 @@ import express, {
 } from "express";
 import globalErrorHandler from "./middlewares/globalErrorhandler.ts";
 import userRouter from "./user/userRouter.ts";
+import cors from "cors";
+import morgan from "morgan";
 
 const app = express();
-
 app.use(express.json());
+app.use(cors());
+morgan('dev')
+
+
 
 //Routes
 // http methods
