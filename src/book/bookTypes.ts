@@ -3,7 +3,7 @@ import type { User } from "../user/userTypes.ts";
 export interface Book {
   _id: string;
   title: string;
-  author: User;
+  author: string | User;
   genre: string;
   coverImage: string;
   file: string;
